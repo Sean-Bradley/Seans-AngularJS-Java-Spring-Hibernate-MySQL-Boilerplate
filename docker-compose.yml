@@ -1,0 +1,96 @@
+version: '3'
+services:
+  web:
+    container_name: nginx
+    build: .
+    ports:
+      - "8443:8443"
+    command: nginx -g "daemon off";
+    volumes:
+      - ./angularjs/dist:/www:ro
+    depends_on:      
+      - mysql
+      - java
+
+  mysql:
+    image: mysql
+    container_name: mysql
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_DATABASE: seanwasere
+      MYSQL_ROOT_PASSWORD: secret
+    expose:
+      - "3306"
+    restart: always
+    volumes:
+      - ./db:/docker-entrypoint-initdb.d
+
+  java:
+    container_name: java
+    restart: always
+    build: ./java
+    working_dir: /java
+    volumes:
+      - ./java:/java
+    expose:
+      - "8080"
+    command: mvn clean spring-boot:run
+    links:
+      - mysql
+
+  # mongodb:
+  #   container_name: mongodb
+  #   image: 'bitnami/mongodb:latest'
+  #   # volumes:
+  #   #   - ./data:/data/db
+  #   ports:
+  #     - "27017:27017"
+  #   environment:
+  #     - MONGODB_DATABASE=seanwasere
+      
+  # nodejs:
+  #   build:
+  #     context: .
+  #     dockerfile: nodejs/Dockerfile
+  #   expose:
+  #     - "8080"
+  #   volumes:
+  #     - ./nodejs:/nodejs
+  #   command: babel-node start.js
+
+
+  # csharp_api:
+  #   build: 
+  #     context: . 
+  #     dockerfile: nodejs/Dockerfile
+  #   expose:
+  #     - "8080"
+  #   volumes:
+  #     - ./csharp:/csharp
+  #     - /data:/data
+  #   command: bash -c "pwd && cd csharpservice/bin/Debug && mono csharpservice.exe"
+
+  # python_api:
+  #   build: 
+  #     context: . 
+  #     dockerfile: Maps3DPythonApi/Dockerfile
+  #   expose:
+  #     - "8000"
+  #   volumes:
+  #     - ./python:/python
+  #   command: gunicorn -w 1 app:app -b :8000 --log-level debug --reload
+
+  # scala_api:
+  #   build:
+  #     context: .
+  #     dockerfile: scala/Dockerfile
+  #   expose:
+  #     - "8090"
+  #   volumes:
+  #     - ./scala:/scala
+  #   environment:
+  #     - AWS_ACCESS_KEY_ID=abcd
+  #     - AWS_SECRET_ACCESS_KEY=efgh
+  #   command:  sbt run
+
+  
