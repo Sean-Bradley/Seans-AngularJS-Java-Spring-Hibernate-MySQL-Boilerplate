@@ -1,2 +1,3 @@
-# Seans-AngularJS-Java-Spring-Hibernate-MySQL-Boilerplate-
+# Seans-AngularJS-Java-Spring-Hibernate-MySQL-Boilerplate
+
 WIP
