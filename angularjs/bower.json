@@ -1,0 +1,10 @@
+{
+    "name": "seans-angularjs-nodejs-mongodb-boilerplate",
+    "version": "1.0.0",
+    "dependencies": {
+        "bootstrap": "3.3.7",
+        "angular": "latest",
+        "angular-route": "latest",
+        "jquery": "3.3.1"  
+    }
+}

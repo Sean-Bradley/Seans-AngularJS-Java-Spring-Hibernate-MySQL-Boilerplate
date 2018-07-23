@@ -7,7 +7,7 @@ services:
       - "8443:8443"
     command: nginx -g "daemon off";
     volumes:
-      - ./angularjs/dist:/www:ro
+      - ./www:/www:ro
     depends_on:      
       - mysql
       - java

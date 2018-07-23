@@ -1,0 +1,65 @@
+<div ng-controller="catsCtrl">
+    <h1>{{title}}</h1>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Is Hungry</th>
+                <th>Last Fed</th>
+                <th>&nbsp;</th>
+                <th>&nbsp;</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="item in items | 
+            orderBy: 'lastFedDate':true |
+            offset: currentPage*itemsPerPage |
+            limitTo: itemsPerPage">
+                <td>{{(currentPage * itemsPerPage) + ($index + 1)}}</td>
+                <td width="50%">
+                    <span ng-show="!editing[item.id]" ng-bind="item.name"></span>
+                    <input ng-show="editing[item.id]" type="text" ng-model="item.name" required>
+                    <button ng-show="editing[item.id]" ng-click="update(item.id, item)">Update</button>
+                </td>
+                <td>{{item.isHungry}}</td>
+                <td>{{item.lastFedDate | date:'medium'}}</td>
+                <td>
+                    <button ng-show="!editing[item.id]" ng-click="edit(item.id)">Edit</button>
+                </td>
+                <td>
+                    <button ng-click="delete(item.id)">Delete</button>
+                </td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <td colspan="6">
+                <div>
+                    <ul class="pagination">
+                        <li ng-class="prevPageDisabled()">
+                            <a href ng-click="prevPage()">« Prev</a>
+                        </li>
+                        <li ng-repeat="n in range()" ng-class="{active: n == currentPage}" ng-click="setPage(n)">
+                            <a href="#!cats">{{n+1}}</a>
+                        </li>
+                        <li ng-class="nextPageDisabled()">
+                            <a href ng-click="nextPage()">Next »</a>
+                        </li>
+                    </ul>
+                </div>
+            </td>
+        </tfoot>
+    </table>
+
+    <form class="form-inline" name="addCatForm">
+        <p>Cat Name:
+            <input type="text" name="catName" ng-model="catName" required />
+            <button ng-click="addCat()" ng-disabled="addCatForm.catName.$invalid">Add Cat</button>
+            <span style="color:red" ng-show="addCatForm.catName.$dirty && addCatForm.catName.$error.required">Cat Name is required.</span>            
+        </p>
+    </form>
+    <hr/>
+    <div>Debug
+        <pre>{{ debugPanel }}</pre>
+    </div>
+</div>
