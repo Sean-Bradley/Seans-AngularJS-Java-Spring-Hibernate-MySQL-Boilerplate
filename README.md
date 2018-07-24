@@ -1,8 +1,9 @@
 # Seans-AngularJS-Java-Spring-Hibernate-MySQL-Boilerplate
 
-Comes With tests
-- Mocha and Chai test scripts for testing the nodejs models
-- Chai-Http for testing the nodejs routes
+*Dockerised and with tests*
+
+Tests
+- Mocha and Chai test scripts for testing the routes
 - Protractor e2e and Jasmine tests for the AngularJS UI
 
 And
@@ -18,7 +19,7 @@ And
 
 `cd Seans-AngularJS-Java-Spring-Hibernate-MySQL-Boilerplate`
 
-`cd angular.js`
+`cd angularjs`
 
 `npm install`
 
@@ -65,13 +66,19 @@ This will automatically,
 All the AngularJS specific files should be edited from the `ngSrc` folder.
 Any changes will be automatically tested, recompiled, minified and saved to the public `www` folder.
 
+## Mocha Chai tests
+
+`cd angularjs`
+
+`npm test`
+
 ## e2e Testing
 
 There is also the option to do e2e testing with protractor and jasmine.
 
 Before you start, you need to install protractor
 
-`cd nodejs`
+`cd angularjs`
 
 `npm install -g protractor`
 
