@@ -10,7 +10,7 @@ describe('Home', function () {
     expect(element.all(by.css('[ng-view] h1'))
       .first()
       .getText()).
-      toMatch(/seans angularjs nodejs mongodb boilerplate/);
+      toMatch(/seans angularjs java spring hibernate mysql boilerplate/);
   });
 });
 
