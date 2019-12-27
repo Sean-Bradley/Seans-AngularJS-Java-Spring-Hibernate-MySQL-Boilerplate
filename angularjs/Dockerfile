@@ -1,6 +1,6 @@
 FROM node:8.1.2-alpine
 
-LABEL Sean Bradley <seanwasere@gmail.com>
+LABEL https://github.com/Sean-Bradley
 
 RUN mkdir -p /nodejs
 COPY . /nodejs
